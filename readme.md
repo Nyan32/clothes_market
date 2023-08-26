@@ -2,4 +2,4 @@
 
 This module used to handle clothes material.
 
-![Alt text](Clothes Market ERD.png "Title")
+<img src="Clothes Market ERD.png" style="text-align:center">
