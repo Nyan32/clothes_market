@@ -1,0 +1,4 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+clothes_model,clothes_model,model_clothes_market_clothes,base.group_user,1,1,1,1
+types_model,types_model,model_clothes_market_types,base.group_user,1,1,1,1
+suppliers_model,suppliers_model,model_clothes_market_suppliers,base.group_user,1,1,1,1
