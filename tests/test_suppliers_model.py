@@ -1,7 +1,5 @@
 import odoo
-from unittest.mock import patch
 from odoo.tests.common import TransactionCase
-from odoo.addons.clothes_market.models.suppliers_model import SuppliersModel
 
 
 class TestSuppliersModel(TransactionCase):
