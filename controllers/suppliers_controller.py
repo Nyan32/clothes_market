@@ -1,5 +1,6 @@
 from odoo import http
 from odoo.http import request, Response
+from odoo.exceptions import MissingError
 import json
 
 
@@ -46,7 +47,7 @@ class SuppliersController(http.Controller):
         old_data_list = suppliers_module.search([('id', '=', int(req_id))])
 
         if len(old_data_list) < 1:
-            raise ValueError("Supplier with given ID is not found")
+            raise MissingError("Supplier with given ID is not found")
 
         old_data_list.write(req)
 
@@ -61,6 +62,6 @@ class SuppliersController(http.Controller):
 
         target_delete = suppliers_module.search([('id', '=', int(req_id))])
         if len(target_delete) < 1:
-            raise ValueError("Supplier with given ID is not found")
+            raise MissingError("Supplier with given ID is not found")
 
         target_delete.unlink()

@@ -1,5 +1,6 @@
 from odoo import http
 from odoo.http import request, Response
+from odoo.exceptions import ValidationError, UserError, MissingError
 import json
 
 
@@ -12,9 +13,9 @@ class ClothesController(http.Controller):
         clothes_module = request.env['clothes_market.clothes']
 
         if req['buy_price'] < 100:
-            raise ValueError("Buy price cannot be under 100")
+            raise UserError("Buy price cannot be under 100")
         if clothes_module.search([("code", "=", req['code'])]):
-            raise ValueError("Code must be unique")
+            raise ValidationError("Code must be unique")
 
         clothes_module.create(req)
 
@@ -66,15 +67,15 @@ class ClothesController(http.Controller):
         old_data_list = clothes_module.search([('id', '=', int(req_id))])
 
         if len(old_data_list) < 1:
-            raise ValueError("Cloth with given ID is not found")
+            raise MissingError("Cloth with given ID is not found")
 
         old_code = old_data_list['code']
         new_code = req['code']
 
         if req['buy_price'] < 100:
-            raise ValueError("Buy price cannot be under 100")
+            raise UserError("Buy price cannot be under 100")
         if clothes_module.search([("code", "=", req['code'])]) and new_code != old_code:
-            raise ValueError("Code must be unique")
+            raise ValidationError("Code must be unique")
 
         old_data_list.write(req)
 
@@ -89,6 +90,6 @@ class ClothesController(http.Controller):
 
         target_delete = clothes_module.search([('id', '=', int(req_id))])
         if len(target_delete) < 1:
-            raise ValueError("Cloth with given ID is not found")
+            raise MissingError("Cloth with given ID is not found")
 
         target_delete.unlink()

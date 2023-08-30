@@ -1,5 +1,6 @@
 from odoo import http
 from odoo.http import request, Response
+from odoo.exceptions import MissingError
 import json
 
 
@@ -48,7 +49,7 @@ class TypesController(http.Controller):
         old_data_list = types_module.search([('id', '=', int(req_id))])
 
         if len(old_data_list) < 1:
-            raise ValueError("Type with given ID is not found")
+            raise MissingError("Type with given ID is not found")
 
         req['name'] = req['name'].lower()
 
@@ -65,6 +66,6 @@ class TypesController(http.Controller):
 
         target_delete = types_module.search([('id', '=', int(req_id))])
         if len(target_delete) < 1:
-            raise ValueError("Type with given ID is not found")
+            raise MissingError("Type with given ID is not found")
 
         target_delete.unlink()
